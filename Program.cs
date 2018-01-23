@@ -30,8 +30,6 @@ namespace Autoverseny
 
             for (int i = startIndex; i > startIndex - pilots && xPos > 0; i--)
             {
-                //byte exPosition = (byte)pilotak.FindIndex(y => y.getRank() == i + xPos);
-                
                 pilotak[pilotak.FindIndex(y => y.getRank() == i)].setBox(pilotak, (byte)(xPos + 1), nCount);
                 Console.WriteLine($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }");
 
@@ -112,7 +110,7 @@ namespace Autoverseny
 
             }
 
-            public AgresszivPilota()    // : base() / this()    ---> Mit eredményez?
+            public AgresszivPilota()
             {
                 elozesKor = 2;
                 elozesiEsely = 100 / 3.0;
@@ -193,28 +191,15 @@ namespace Autoverseny
             protected string nev;
             protected bool versenyben;
             protected byte rank;
-            //byte stilus;
-
-
+            
             protected Auto auto;
-            //
-
-            /*public Versenyzo(string _nev, bool _versenyben, byte _rank, Auto _auto)
-            {
-                nev = _nev;
-                versenyben = _versenyben;
-                rank = _rank;
-
-                auto = _auto;
-
-            }*/
-
+            
 
             public Versenyzo()
             {
                 nev = "";
                 versenyben = true;
-                rank = Byte.MaxValue;   // => 255
+                rank = Byte.MaxValue;
                 auto = new Auto("benzin", 100);
 
             }
@@ -248,7 +233,6 @@ namespace Autoverseny
             {
                 if (rankMod < 0) rank -= (byte)Math.Abs(rankMod);
                 else rank += (byte)Math.Abs(rankMod);
-                //else if (rankMod == 0) rank = (byte)Math.Abs(rankMod);
 
             }
 
@@ -298,11 +282,8 @@ namespace Autoverseny
 
 
                         if (x + 1 < xCount) helyCsere(pilotak, (byte)(x + 1), 1, xCount);  // A feltétel vizsgálata arra vonatkozik hogy a "leghátsó kieső"
-                                                                                   // pilota mögött volt(ak)-e versenyben levő pilota/pilóták....
+                                                                                           // pilota mögött volt(ak)-e versenyben levő pilota/pilóták....
 
-                        //int Y = 0;
-                        //pilotak.ForEach(p => { if (p.getRank() <= xCount && p.getRank() > x + 1) p.setRank(-1); Y++; });
-                        //setRank((short)(xCount - x - 1));   //Az éppen kiesett játékos a sor végére kerül!
 
                     }
                     else if ((elozesKor != 4 && rand >= 4 && rand < 8) || (elozesKor == 4 && rand >= 8 && rand < 16))
@@ -310,19 +291,10 @@ namespace Autoverseny
                         versenyben = false;
                         pilotak[pilotak.FindIndex(y => y.getRank() == x)].setVersenyben();
 
-                        //Console.WriteLine($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }\t\t{round}. körben {nev}. KIESETT a(z) {x}. helyen álló {pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()} -nak a beelőzési kísérlete közbeni baleset miatt...");
-                        //Console.WriteLine($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }\t\t{round}. körben {pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()}. KIESETT amikor {nev} a(z) {x}. helyért történő beelőzési kísérlete közben összeütköztek...");
+                        Console.WriteLine($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }\t\t{round}. körben {nev}. KIESETT a(z) {x}. helyen álló {pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()} -nak a beelőzési kísérlete közbeni baleset miatt...");
+                        Console.WriteLine($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }\t\t{round}. körben {pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()}. KIESETT amikor {nev} a(z) {x}. helyért történő beelőzési kísérlete közben összeütköztek...");
 
                         //A kiesett versenyző(k) mögötti, játékban maradt versenyzők "helyezésének" csökkentése ->
-
-                        Console.WriteLine($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }\t\t{round}. körben {nev}. KIESETT a(z) {x}. helyen álló {pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()} -nak a beelőzési kísérlete közbeni baleset miatt...");
-                        Console.Write($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }\t\t");
-                        Console.WriteLine($"{round}. körben {pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()}. KIESETT amikor {nev} a(z) {x}. helyért történő beelőzési kísérlete közben összeütköztek...\t\t{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }");
-
-                        /*int Y = 0;
-                        pilotak.ForEach(p => { if (p.getRank() <= xCount && p.getRank() > x + 1) p.setRank(-2); Y++; });
-                        setRank((short)(xCount - x - 1));
-                        pilotak[pilotak.FindIndex(y => y.getRank() == x)].setRank((short)(xCount - x - 1));*/
 
                         if (x + 1 < xCount) helyCsere(pilotak, (byte)(x + 1), 2, xCount);
                         
@@ -363,30 +335,14 @@ namespace Autoverseny
 
                         //A kiesett versenyző(k) mögötti, játékban maradt versenyzők "helyezésének" csökkentése ->
 
-                        /*int Y = 0;
-                        pilotak.ForEach(p => { if ((!kiesettek.Contains('2') && p.getRank() <= xCount && p.getRank() > x + 1) || (kiesettek.Contains('2') && p.getRank() <= xCount && p.getRank() > x + 2)) { Console.Write("*" + p.getRank() + " - "); p.setRank((short)-diff); Console.WriteLine(p.getRank()); } Y++; });*/
-
-                        //Console.Write("¤" + getRank() + " - "); setRank((short)(xCount - x - 1)); Console.WriteLine(getRank());
-                        //Console.Write("×" + pilotak[pilotak.FindIndex(y => y.getRank() == x)].getRank() + " - ");
-
-                        /*pilotak[pilotak.FindIndex(y => y.getRank() == x)].setRank((short)(xCount - x - 1));*/
-                        
                         
                         if (kiesettek.Contains('1') && !kiesettek.Contains('2') && x + 1 < xCount)
                         {
-                            //Console.Write("×" + pilotak[pilotak.FindIndex(y => y.getRank() == x - 1)].getRank() + " - ");
-                            //pilotak[pilotak.FindIndex(y => y.getRank() == x - 1)].setRank((short)(xCount - x - 1));
-                            //Console.WriteLine(pilotak[pilotak.FindIndex(y => y.getRank() == x - 1)].getRank());
-
                             helyCsere(pilotak, (byte)(x + 1), 3, xCount);
 
                         }
                         else if (!kiesettek.Contains('1') && kiesettek.Contains('2') && x + 2 < xCount)
                         {
-                            //Console.Write("×" + pilotak[pilotak.FindIndex(y => y.getRank() == x + 2)].getRank() + " - ");
-                            //pilotak[pilotak.FindIndex(y => y.getRank() == x + 2)].setRank((short)(xCount - x - 1));
-                            //Console.WriteLine(pilotak[pilotak.FindIndex(y => y.getRank() == x + 2)].getRank());
-
                             helyCsere(pilotak, (byte)(x + 2), 3, xCount);
 
                         }
@@ -418,8 +374,6 @@ namespace Autoverseny
             protected bool esemeny(double esely)
             {
                 double rand = vel.Next(100000) / 1000.0;
-
-                //Console.WriteLine(rand + " < " + esely);
 
                 return rand < esely;
 
@@ -513,26 +467,18 @@ namespace Autoverseny
 
                         if (p.getVersenyben() && p.getElozesiEsely() != 0 && (round) % p.getElozesKor() == 0 && p.getRank() > 1 && xCount > 1)
                         {
-                            ///x = p.getRank();
-                            ///x -= 1;
-
-                            ///Console.Write($"{ pilotak[0].getRank()}_{ pilotak[1].getRank() }_{ pilotak[2].getRank() }_{ pilotak[3].getRank() }_{ pilotak[4].getRank() }_{ pilotak[5].getRank() }_{ pilotak[6].getRank()}_{ pilotak[7].getRank() }\t\t{round}. körben {p.getNev()} előzi a(z) {x}. helyen {pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()} versenyzőt");
-                            ///Console.Write($"\t\t{pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()} >> {pilotak[pilotak.FindIndex(y => y.getRank() == x + 1)].getNev()}");
-
+                            
                             p.setCross(pilotak);
 
-                            //Az esetleges ütközések utáni versenyben maradó pilóták számának ellenőrzése... =>
+                            //Az esetleges ütközések utáni versenyben maradó pilóták számának frissítése... =>
 
                             xCount = (byte)pilotak.Where(P => P.getVersenyben()).Count();
-
-
-                            ///Console.WriteLine($"\t{pilotak[pilotak.FindIndex(y => y.getRank() == x)].getNev()} >> {pilotak[pilotak.FindIndex(y => y.getRank() == x + 1)].getNev()}");
 
                         }
 
 
 
-                        //Az üzemanyag-fogyasztás (körönként) ->
+                        //A körönkénti üzemanyag-fogyasztás ->
 
                         p.setRound();
 
